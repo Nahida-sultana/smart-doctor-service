@@ -5,11 +5,7 @@ name: {
     type: String,
     required: true
 },
-email: {
-    type: String,
-    required: true,
-    unique: true
-},
+phone: { type: String, unique: true },
 password: {
     type: String,
     required: true
@@ -18,7 +14,10 @@ role: {
     type: String,
     enum: ['patient', 'doctor', 'admin'],
     default: 'patient'
-}
-}, { timestamps: true });
+  },   // ✅ comma here
+resetToken: { type: String },
+resetTokenExpiry: { type: Date },
+},
+{ timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);

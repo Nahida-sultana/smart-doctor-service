@@ -3,25 +3,22 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { forgotPassword, verifyOtp, resetPassword } = require('../controllers/authController');
 
 // =====================
 // REGISTER
 // =====================
 router.post('/register', async (req, res) => {
-const { name, email, password, role } = req.body;
+const { name, phone, password, role } = req.body;
 
 try {
-    // Check if email already exists
-    const existing = await User.findOne({ email });
+    const existing = await User.findOne({ phone });
     if (existing) {
-    return res.status(400).json({ message: 'Email already in use' });
+    return res.status(400).json({ message: 'Phone number already in use' });
     }
 
-    // Hash the password
     const hashed = await bcrypt.hash(password, 10);
-
-    // Save new user
-    const user = new User({ name, email, password: hashed, role });
+    const user = new User({ name, phone, password: hashed, role });
     await user.save();
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -35,22 +32,19 @@ try {
 // LOGIN
 // =====================
 router.post('/login', async (req, res) => {
-const { email, password } = req.body;
+const { phone, password } = req.body;
 
 try {
-    // Find user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ phone });
     if (!user) {
     return res.status(400).json({ message: 'User not found' });
     }
 
-    // Check password
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
     return res.status(400).json({ message: 'Wrong password' });
     }
 
-    // Generate token
     const token = jwt.sign(
     { id: user._id, role: user.role },
     process.env.JWT_SECRET,
@@ -63,5 +57,12 @@ try {
     res.status(500).json({ message: 'Server error', error: err.message });
 }
 });
+
+// =====================
+// FORGOT PASSWORD
+// =====================
+router.post('/forgot-password', forgotPassword);
+router.post('/verify-otp', verifyOtp);
+router.post('/reset-password', resetPassword);
 
 module.exports = router;
