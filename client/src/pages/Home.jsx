@@ -96,7 +96,7 @@ export default function Home() {
               <Link
                 to="/login"
                 className="block w-full px-4 py-2 text-center text-white rounded-lg bg-gradient-to-r from-cyan-500 to-teal-500"
-              >
+              > bg-gradient-to-br
                 Login
               </Link>
             </div>
@@ -133,7 +133,7 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-teal-300/30 rounded-3xl blur-3xl"></div>
+              <div className="absolute inset-0 from-cyan-300/30 to-teal-300/30 rounded-3xl blur-3xl"></div>
               <div className="relative p-8 border shadow-2xl backdrop-blur-sm bg-white/40 rounded-3xl border-white/60">
                 <img
                   src={DOCTOR_IMAGE}
