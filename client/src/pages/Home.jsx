@@ -20,20 +20,13 @@ import {
   ChevronRight,
   Globe,
 } from "lucide-react";
+import AppointmentPage from "./AppointmentPage";
 
-const DOCTOR_IMAGE = '/doctor.jpeg';
+const DOCTOR_IMAGE = "/doctor.jpeg";
 
 function Brain({ className }) {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
       <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
     </svg>
@@ -42,16 +35,19 @@ function Brain({ className }) {
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showBooking, setShowBooking] = useState(false);
+
+  if (showBooking) {
+    return <AppointmentPage onBack={() => setShowBooking(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50">
 
-      {/* ===== NAVBAR ===== */}
+      {/* NAVBAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b shadow-sm backdrop-blur-md bg-white/70 border-white/20">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-
-            {/* Logo */}
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-xl">
                 <Stethoscope className="w-6 h-6 text-white" />
@@ -62,7 +58,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Desktop Nav Links */}
             <div className="items-center hidden gap-8 md:flex">
               <a href="#home" className="text-gray-700 transition-colors hover:text-cyan-600">Home</a>
               <a href="#services" className="text-gray-700 transition-colors hover:text-cyan-600">Services</a>
@@ -70,33 +65,24 @@ export default function Home() {
               <a href="#contact" className="text-gray-700 transition-colors hover:text-cyan-600">Contact</a>
             </div>
 
-            {/* Login Button */}
             <div className="items-center hidden gap-3 md:flex">
-              <Link
-                to="/login"
-                className="px-4 py-2 text-white transition-all rounded-lg bg-gradient-to-r from-cyan-500 to-teal-500 hover:shadow-lg"
-              >
+              <Link to="/login" className="px-4 py-2 text-white transition-all rounded-lg bg-gradient-to-r from-cyan-500 to-teal-500 hover:shadow-lg">
                 Login
               </Link>
             </div>
 
-            {/* Mobile Hamburger */}
             <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
 
-          {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="py-4 space-y-3 border-t md:hidden border-white/30">
               <a href="#home" className="block py-2 text-gray-700 hover:text-cyan-600">Home</a>
               <a href="#services" className="block py-2 text-gray-700 hover:text-cyan-600">Services</a>
               <a href="#health-info" className="block py-2 text-gray-700 hover:text-cyan-600">Health Info</a>
               <a href="#contact" className="block py-2 text-gray-700 hover:text-cyan-600">Contact</a>
-              <Link
-                to="/login"
-                className="block w-full px-4 py-2 text-center text-white rounded-lg bg-gradient-to-r from-cyan-500 to-teal-500"
-              > bg-gradient-to-br
+              <Link to="/login" className="block w-full px-4 py-2 text-center text-white rounded-lg bg-gradient-to-r from-cyan-500 to-teal-500">
                 Login
               </Link>
             </div>
@@ -104,7 +90,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* ===== HERO SECTION ===== */}
+      {/* HERO SECTION */}
       <section id="home" className="px-4 pt-24 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-12 md:grid-cols-2">
@@ -114,16 +100,13 @@ export default function Home() {
               </div>
               <h1 className="text-5xl font-bold leading-tight text-gray-900 md:text-6xl">
                 Your Health, <br />
-                <span className="text-transparent bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text">
-                  Our Priority
-                </span>
+                <span className="text-transparent bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text">Our Priority</span>
               </h1>
               <p className="text-lg leading-relaxed text-gray-600">
-                Access quality healthcare from the comfort of your home. Connect with experienced doctors
-                for online consultations and comprehensive health services.
+                Access quality healthcare from the comfort of your home. Connect with experienced doctors for online consultations and comprehensive health services.
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="flex items-center gap-2 px-8 py-4 text-white transition-all shadow-lg bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl hover:shadow-xl">
+                <button onClick={() => setShowBooking(true)} className="flex items-center gap-2 px-8 py-4 text-white transition-all shadow-lg bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl hover:shadow-xl">
                   Book Appointment <ChevronRight className="w-5 h-5" />
                 </button>
                 <button className="px-8 py-4 text-gray-700 transition-all border backdrop-blur-md bg-white/70 rounded-xl border-white/40 hover:shadow-lg">
@@ -133,20 +116,16 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute inset-0 from-cyan-300/30 to-teal-300/30 rounded-3xl blur-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-teal-300/30 rounded-3xl blur-3xl"></div>
               <div className="relative p-8 border shadow-2xl backdrop-blur-sm bg-white/40 rounded-3xl border-white/60">
-                <img
-                  src={DOCTOR_IMAGE}
-                  alt="Dr. Ariyan Jawad"
-                  className="object-cover w-full h-96 rounded-2xl"
-                />
+                <img src={DOCTOR_IMAGE} alt="Dr. Ariyan Jawad" className="object-cover w-full h-96 rounded-2xl" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== DOCTOR PROFILE SECTION ===== */}
+      {/* DOCTOR PROFILE SECTION */}
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
@@ -156,21 +135,15 @@ export default function Home() {
           <div className="max-w-md mx-auto">
             <div className="p-8 transition-all border shadow-xl backdrop-blur-md bg-white/60 rounded-2xl border-white/60 hover:shadow-2xl">
               <div className="w-32 h-32 mx-auto mb-6 overflow-hidden border-4 rounded-full border-cyan-400">
-                <img
-                  src={DOCTOR_IMAGE}
-                  alt="Dr. Ariyan Jawad"
-                  className="object-cover w-full h-full"
-                />
+                <img src={DOCTOR_IMAGE} alt="Dr. Ariyan Jawad" className="object-cover w-full h-full" />
               </div>
               <div className="space-y-3 text-center">
                 <h3 className="text-2xl font-semibold text-gray-900">Dr. Ariyan Jawad</h3>
-                <p className="font-medium text-cyan-600">MBBS, PGT (Medicine), CCD (Birdem)</p>
+                <p className="font-medium text-cyan-600">MBBS, PGT</p>
                 <p className="pt-3 text-sm leading-relaxed text-gray-600">
-                  Specializations include General Medicine, Paediatrics, Diabetes management,
-                  Rheumatic diseases, and Skin care. Dedicated to delivering patient-centered
-                  treatment and continuous healthcare support through both in-person and online consultation.
+                  Specializations include General Medicine, Paediatrics, Diabetes management, Rheumatic diseases, and Skin care. Dedicated to delivering patient-centered treatment and continuous healthcare support through both in-person and online consultation.
                 </p>
-                <button className="w-full px-6 py-3 mt-4 text-white transition-all bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl hover:shadow-lg">
+                <button onClick={() => setShowBooking(true)} className="w-full px-6 py-3 mt-4 text-white transition-all bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl hover:shadow-lg">
                   Book Appointment
                 </button>
               </div>
@@ -179,7 +152,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== APPOINTMENT SECTION ===== */}
+      {/* APPOINTMENT SECTION */}
       <section id="services" className="px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-br from-white/50 to-cyan-50/50">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-12 md:grid-cols-2">
@@ -190,10 +163,9 @@ export default function Home() {
               </div>
               <h2 className="text-4xl font-bold text-gray-900">Book Your Appointment</h2>
               <p className="leading-relaxed text-gray-600">
-                Schedule your consultation at your convenience. Choose your preferred date, time, and doctor.
-                Get instant confirmation and reminders.
+                Schedule your consultation at your convenience. Choose your preferred date, time, and doctor. Get instant confirmation and reminders.
               </p>
-              <button className="px-8 py-4 text-white transition-all shadow-lg bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl hover:shadow-xl">
+              <button onClick={() => setShowBooking(true)} className="px-8 py-4 text-white transition-all shadow-lg bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl hover:shadow-xl">
                 Schedule Now
               </button>
             </div>
@@ -214,9 +186,7 @@ export default function Home() {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {["10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM"].map((time) => (
-                      <button key={time} className="px-4 py-2 text-sm transition-colors bg-white border rounded-lg hover:bg-cyan-100 border-cyan-100">
-                        {time}
-                      </button>
+                      <button key={time} className="px-4 py-2 text-sm transition-colors bg-white border rounded-lg hover:bg-cyan-100 border-cyan-100">{time}</button>
                     ))}
                   </div>
                 </div>
@@ -226,16 +196,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== TELEMEDICINE SECTION ===== */}
+      {/* TELEMEDICINE SECTION */}
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div className="overflow-hidden border shadow-xl backdrop-blur-md bg-white/60 rounded-2xl border-white/60">
-              <img
-                src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=800&q=80"
-                alt="Telemedicine Consultation"
-                className="object-cover w-full h-80"
-              />
+              <img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=800&q=80" alt="Telemedicine Consultation" className="object-cover w-full h-80" />
               <div className="p-6 text-white bg-gradient-to-br from-cyan-500 to-teal-500">
                 <div className="flex items-center gap-3">
                   <MessageSquare className="w-6 h-6" />
@@ -253,10 +219,7 @@ export default function Home() {
                 <span className="text-sm text-cyan-600">Remote Healthcare</span>
               </div>
               <h2 className="text-4xl font-bold text-gray-900">Consult from Home</h2>
-              <p className="leading-relaxed text-gray-600">
-                Connect with healthcare professionals through secure chat consultations.
-                Get expert medical advice without leaving your home.
-              </p>
+              <p className="leading-relaxed text-gray-600">Connect with healthcare professionals through secure chat consultations. Get expert medical advice without leaving your home.</p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-100 to-teal-100 rounded-xl">
@@ -282,7 +245,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== HEALTH AWARENESS SECTION ===== */}
+      {/* HEALTH AWARENESS SECTION */}
       <section id="health-info" className="px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-br from-white/50 to-teal-50/50">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
@@ -308,7 +271,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== HEALTH BULLETIN SECTION ===== */}
+      {/* HEALTH BULLETIN SECTION */}
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
@@ -339,7 +302,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== FOLLOW-UP CHAT SECTION ===== */}
+      {/* FOLLOW-UP CHAT SECTION */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-br from-white/50 to-cyan-50/50">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-12 md:grid-cols-2">
@@ -349,10 +312,7 @@ export default function Home() {
                 <span className="text-sm text-cyan-600">Continuous Care</span>
               </div>
               <h2 className="text-4xl font-bold text-gray-900">Stay Connected After Consultation</h2>
-              <p className="leading-relaxed text-gray-600">
-                Our follow-up system ensures you receive continuous support. Share updates, ask questions,
-                and get timely responses from your healthcare provider.
-              </p>
+              <p className="leading-relaxed text-gray-600">Our follow-up system ensures you receive continuous support. Share updates, ask questions, and get timely responses from your healthcare provider.</p>
             </div>
 
             <div className="p-6 border shadow-xl backdrop-blur-md bg-white/60 rounded-2xl border-white/60">
@@ -390,11 +350,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== FOOTER ===== */}
+      {/* FOOTER */}
       <footer id="contact" className="px-4 py-12 text-white bg-gradient-to-br from-gray-900 to-gray-800 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 mb-8 md:grid-cols-4">
-
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-xl">
@@ -405,18 +364,14 @@ export default function Home() {
                   <div className="text-sm text-gray-400">Service</div>
                 </div>
               </div>
-              <p className="text-sm text-gray-400">
-                Connecting patients with trusted healthcare professionals for better health outcomes.
-              </p>
+              <p className="text-sm text-gray-400">Connecting patients with trusted healthcare professionals for better health outcomes.</p>
             </div>
 
             <div>
               <h4 className="mb-4 font-semibold">Quick Links</h4>
               <div className="space-y-2 text-sm">
                 {["Home", "Services", "Health Info", "Contact"].map((link) => (
-                  <a key={link} href={`#${link.toLowerCase().replace(" ", "-")}`} className="block text-gray-400 transition-colors hover:text-white">
-                    {link}
-                  </a>
+                  <a key={link} href={`#${link.toLowerCase().replace(" ", "-")}`} className="block text-gray-400 transition-colors hover:text-white">{link}</a>
                 ))}
               </div>
             </div>
@@ -424,18 +379,9 @@ export default function Home() {
             <div>
               <h4 className="mb-4 font-semibold">Contact Info</h4>
               <div className="space-y-3 text-sm text-gray-400">
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
-                  <span>+880 1834-507590</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  <span>ariyanjawad@gmail.com</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  <span>Chittagong, Bangladesh</span>
-                </div>
+                <div className="flex items-center gap-2"><Phone className="w-4 h-4" /><span>+880 1234-567890</span></div>
+                <div className="flex items-center gap-2"><Mail className="w-4 h-4" /><span>info@smartdoctor.com</span></div>
+                <div className="flex items-center gap-2"><MapPin className="w-4 h-4" /><span>Dhaka, Bangladesh</span></div>
               </div>
             </div>
 
@@ -448,7 +394,6 @@ export default function Home() {
                 <a href="#" className="flex items-center justify-center w-10 h-10 transition-colors rounded-lg bg-white/10 hover:bg-white/20"><Globe className="w-5 h-5" /></a>
               </div>
             </div>
-
           </div>
 
           <div className="pt-8 text-sm text-center text-gray-400 border-t border-gray-700">
