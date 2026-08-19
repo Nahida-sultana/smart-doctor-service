@@ -1,0 +1,12 @@
+{
+  "name": "smart-doctor-service",
+  "private": true,
+  "scripts": {
+    "server": "npm run dev --prefix backend",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
